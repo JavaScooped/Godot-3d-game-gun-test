@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://limbf7g6optn"]
+
+[ext_resource type="Script" path="res://Label.gd" id="1_6dyop"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="CanvasLayer/RichTextLabel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+scale = Vector2(1.89532, 1.71018)
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Fps:"
+script = ExtResource("1_6dyop")

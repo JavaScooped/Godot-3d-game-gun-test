@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5xidgrw0mkh5"]
+
+[ext_resource type="PackedScene" uid="uid://c36h7id11trm" path="res://enemy.glb" id="1_js5et"]
+[ext_resource type="Script" path="res://enemy.gd" id="1_vsdej"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2bf46"]
+size = Vector3(4.39557, 2.88672, 1)
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_vsdej")
+
+[node name="enemy" parent="." instance=ExtResource("1_js5et")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0111604, 0, -0.0126787)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0150452, -0.402344, 0)
+shape = SubResource("BoxShape3D_2bf46")

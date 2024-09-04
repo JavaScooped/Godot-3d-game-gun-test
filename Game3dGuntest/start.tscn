@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1o78uvl5ri3o"]
+
+[ext_resource type="Script" path="res://Begin.gd" id="1_rebtx"]
+[ext_resource type="Script" path="res://Quit.gd" id="2_2nxn4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_vad7e"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visibility_layer = 2
+offset_top = 2.0
+offset_right = 40.0
+offset_bottom = 42.0
+scale = Vector2(28.7663, 16.1677)
+color = Color(1, 0.360784, 1, 1)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 403.0
+offset_top = 116.0
+offset_right = 486.0
+offset_bottom = 139.0
+scale = Vector2(3.90457, 6.16216)
+text = "TwoWeeks"
+label_settings = SubResource("LabelSettings_vad7e")
+
+[node name="Begin" type="Button" parent="."]
+offset_left = 450.0
+offset_top = 286.0
+offset_right = 663.0
+offset_bottom = 364.0
+text = "Begin"
+script = ExtResource("1_rebtx")
+
+[node name="Quit" type="Button" parent="."]
+offset_left = 478.0
+offset_top = 404.0
+offset_right = 638.0
+offset_bottom = 453.0
+text = "Quit"
+script = ExtResource("2_2nxn4")
+
+[connection signal="pressed" from="Begin" to="Begin" method="_on_pressed"]
+[connection signal="pressed" from="Quit" to="Begin" method="_on_quit_pressed"]
+[connection signal="pressed" from="Quit" to="Quit" method="_on_pressed"]

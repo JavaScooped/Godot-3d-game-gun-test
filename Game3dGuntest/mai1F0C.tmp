@@ -1,0 +1,440 @@
+[gd_scene load_steps=28 format=3 uid="uid://bltcnoi3qnk8g"]
+
+[ext_resource type="Texture2D" uid="uid://dj0mb1wnw2gav" path="res://sky.jpg" id="1_4mwah"]
+[ext_resource type="Script" path="res://main.gd" id="1_tmhxa"]
+[ext_resource type="Script" path="res://player.gd" id="3_8ya4m"]
+[ext_resource type="PackedScene" uid="uid://bvwi38ks4sa1o" path="res://man.glb" id="4_46vya"]
+[ext_resource type="Texture2D" uid="uid://cbkaoslx10i5d" path="res://gorundtexture.jpg" id="5_fuhvm"]
+[ext_resource type="PackedScene" uid="uid://cda5eg6xnuuv" path="res://glock19.glb" id="5_gk86d"]
+[ext_resource type="PackedScene" uid="uid://drh54mabfp0bm" path="res://shotgun.glb" id="6_1ths4"]
+[ext_resource type="PackedScene" uid="uid://c44dqtpennsw0" path="res://rocks.glb" id="7_amc2u"]
+[ext_resource type="PackedScene" uid="uid://djsc6jxwb8pyh" path="res://pillar-large.glb" id="8_mrvqj"]
+[ext_resource type="PackedScene" uid="uid://bxf8s5nhmrxb7" path="res://pine.glb" id="9_w1bbi"]
+[ext_resource type="PackedScene" uid="uid://limbf7g6optn" path="res://HUD.tscn" id="10_qe7n4"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_cxd0m"]
+panorama = ExtResource("1_4mwah")
+
+[sub_resource type="Sky" id="Sky_765ia"]
+sky_material = SubResource("PanoramaSkyMaterial_cxd0m")
+
+[sub_resource type="Environment" id="Environment_pf0la"]
+background_mode = 2
+background_energy_multiplier = 0.65
+sky = SubResource("Sky_765ia")
+ambient_light_source = 3
+ambient_light_color = Color(0.909804, 0.909804, 0.909804, 1)
+ambient_light_energy = 7.1
+reflected_light_source = 2
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r6mlu"]
+height = 1.6389
+
+[sub_resource type="Animation" id="Animation_po1bw"]
+resource_name = "gun_anim"
+length = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.2001),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.387368, 0.473259, -0.480041), Vector3(0.387368, 0.473259, -0.446456), Vector3(0.387368, 0.473259, -0.446456), Vector3(0.387368, 0.473259, -0.446456)]
+}
+
+[sub_resource type="Animation" id="Animation_3ti34"]
+resource_name = "swaptogun"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.17196, 0.129513, 0.0373194), Vector3(0.379227, 0.441069, -0.486326)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-1.00346, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3bua8"]
+_data = {
+"gun_anim": SubResource("Animation_po1bw"),
+"swaptogun": SubResource("Animation_3ti34")
+}
+
+[sub_resource type="Animation" id="Animation_upipc"]
+resource_name = "shotgun_anim"
+length = 0.7
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.390235, 0.44858, -0.522573, 0.1, 1, 0.390235, 0.44858, -0.235026, 0.7, 1, 0.390235, 0.44858, -0.41455)
+
+[sub_resource type="Animation" id="Animation_ut2fv"]
+resource_name = "swaptoshotgun"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.0697427, 0.44858, 0.244524), Vector3(0.390235, 0.44858, -0.41455)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.550847, -1.44114, 0.0681401), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dh4iv"]
+_data = {
+"shotgun_anim": SubResource("Animation_upipc"),
+"swaptoshotgun": SubResource("Animation_ut2fv")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_22h7d"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ixwk7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0gsjd"]
+albedo_texture = ExtResource("5_fuhvm")
+uv1_offset = Vector3(-0.21, 0, 0)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 0.659754
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_p8knn"]
+vertices = PackedVector3Array(29.7884, -0.50572, -30.0948, 29.2884, -0.50572, -30.5948, 29.2884, -0.50572, -30.0948, 28.7884, -0.50572, -29.3448, 29.7884, -0.50572, -30.0948, 29.2884, -0.50572, -30.0948, 28.0384, -0.50572, -28.8448, 27.5384, -0.50572, -28.8448, 27.5384, -0.50572, -28.0948, 28.7884, -0.50572, -29.3448, 29.2884, -0.50572, -30.0948, 27.7884, -0.50572, -30.0948, 28.0384, -0.50572, -28.8448, 28.7884, -0.50572, -27.3448, 28.7884, -0.50572, -29.3448, 28.0384, -0.50572, -28.8448, 27.5384, -0.50572, -28.0948, 31.2884, 2.24428, -30.3448, 31.2884, 2.24428, -29.5948, 32.5384, 2.24428, -29.5948, 32.5384, 2.24428, -30.5948, 30.0384, 0.49428, -27.5948, 32.0384, 0.49428, -27.8448, 31.7884, 0.49428, -28.3448, 30.0384, 0.49428, -28.8448, 30.7884, 0.99428, -26.0948, 31.0384, 0.99428, -25.5948, 32.0384, 0.99428, -25.5948, 31.7884, 0.99428, -26.8448)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(5, 4, 3), PackedInt32Array(8, 7, 6), PackedInt32Array(12, 11, 9), PackedInt32Array(9, 11, 10), PackedInt32Array(15, 14, 16), PackedInt32Array(16, 14, 13), PackedInt32Array(18, 17, 19), PackedInt32Array(19, 17, 20), PackedInt32Array(22, 21, 23), PackedInt32Array(23, 21, 24), PackedInt32Array(26, 25, 27), PackedInt32Array(27, 25, 28)]
+agent_max_slope = 90.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fkjwl"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_llvml"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_tmhxa")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_pf0la")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+transform = Transform3D(3.26918, 0, 0, 0, 3.26918, 0, 0, 0, 3.26918, 0, 1.5313, 0)
+script = ExtResource("3_8ya4m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(-2.22121e-08, 0, 2.07643, 0, 1.00514, 0, -0.508154, 0, -9.07636e-08, 0, 0.123899, -0.0247802)
+shape = SubResource("CapsuleShape3D_r6mlu")
+
+[node name="man" parent="CharacterBody3D" instance=ExtResource("4_46vya")]
+transform = Transform3D(-3.46083e-09, 0, 0.0791745, 0, 0.0791745, 0, -0.0791745, 0, -3.46083e-09, -0.0433827, 0.367514, 0.0419427)
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D"]
+transform = Transform3D(0.305887, 0, 0, 0, 0.305887, 0, 0, 0, 0.305887, -0.05, 0.75, -0.15)
+
+[node name="glock19" parent="CharacterBody3D" instance=ExtResource("5_gk86d")]
+transform = Transform3D(0.0292317, 0, 0, 0, 0.0292316, 0, 0, 0, 0.0292316, 0.387368, 0.473259, -0.446456)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody3D/glock19"]
+libraries = {
+"": SubResource("AnimationLibrary_3bua8")
+}
+
+[node name="RayCast3D" type="RayCast3D" parent="CharacterBody3D/glock19"]
+transform = Transform3D(-3.90481e-07, -5.59264, 0, 8.93316, -2.44462e-07, 0, 0, 0, 4.27858, -2.86102e-06, 2.29092, -20.4842)
+target_position = Vector3(0, 0, -1)
+debug_shape_custom_color = Color(0, 0, 1, 1)
+
+[node name="shotgun" parent="CharacterBody3D" instance=ExtResource("6_1ths4")]
+transform = Transform3D(0.011812, -0.0664187, -0.106566, 0.0073172, 0.107218, -0.0660143, 0.125356, 0, 0.0138948, -0.0697427, 0.44858, 0.244524)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody3D/shotgun"]
+libraries = {
+"": SubResource("AnimationLibrary_dh4iv")
+}
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+gravity_scale = 0.0
+lock_rotation = true
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.00572, 0.115048)
+shape = SubResource("BoxShape3D_22h7d")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D/CollisionShape3D"]
+transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, 0, 0)
+mesh = SubResource("BoxMesh_ixwk7")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_0gsjd")
+
+[node name="RayCast3D" type="RayCast3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.96389, -12.8805)
+
+[node name="HUD" parent="." instance=ExtResource("10_qe7n4")]
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_p8knn")
+
+[node name="pillar-large2" parent="NavigationRegion3D" instance=ExtResource("8_mrvqj")]
+transform = Transform3D(7.05181, 0, 0, 0, 7.05181, 0, 0, 0, 7.05181, -7.41002, -1.50572, -17.1587)
+
+[node name="pillar-large3" parent="NavigationRegion3D/pillar-large2" instance=ExtResource("8_mrvqj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.18338, 0.00481583, 0.0184977)
+
+[node name="rocks2" parent="NavigationRegion3D" instance=ExtResource("7_amc2u")]
+transform = Transform3D(7.39477, 0, 0, 0, 7.39477, 0, 0, 0, 7.39477, 30.3298, -1.50572, -28.1075)
+
+[node name="RigidBody3D2" type="RigidBody3D" parent="NavigationRegion3D/rocks2"]
+transform = Transform3D(0.31028, 0, 0, 0, 0.401425, 0, 0, 0, 0.388596, 0.206228, 0.250313, -0.272049)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/rocks2/RigidBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_fkjwl")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(-93.7114, 0, -2.99134e-07, 0, 9.28384, 0, 8.19251e-06, 0, -3.42169, 0.391998, 2.97361, 40.7202)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D2"]
+shape = SubResource("BoxShape3D_llvml")
+
+[node name="pine2" parent="NavigationRegion3D/StaticBody3D2" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(0.0446813, 0, 0, 0, 0.451015, 0, 0, 0, 1.22371, -0.452585, -0.482486, 0.0929928)
+
+[node name="pine3" parent="NavigationRegion3D/StaticBody3D2/pine2" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35668, 0, 0)
+
+[node name="pine4" parent="NavigationRegion3D/StaticBody3D2/pine2/pine3" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.29207, 0, -0.0323019)
+
+[node name="pine5" parent="NavigationRegion3D/StaticBody3D2/pine2/pine3/pine4" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.48588, 0, -0.0323019)
+
+[node name="pine4" parent="NavigationRegion3D/StaticBody3D2/pine2" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.39441, 0, 0)
+
+[node name="pine3" parent="NavigationRegion3D/StaticBody3D2/pine2/pine4" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35668, 0, 0)
+
+[node name="pine4" parent="NavigationRegion3D/StaticBody3D2/pine2/pine4/pine3" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.29207, 0, -0.0323019)
+
+[node name="pine5" parent="NavigationRegion3D/StaticBody3D2/pine2/pine4/pine3/pine4" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.48588, 0, -0.0323019)
+
+[node name="pine4" parent="NavigationRegion3D/StaticBody3D2/pine2/pine4" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.49132, 0, 0)
+
+[node name="pine3" parent="NavigationRegion3D/StaticBody3D2/pine2/pine4/pine4" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35668, 0, 0)
+
+[node name="pine4" parent="NavigationRegion3D/StaticBody3D2/pine2/pine4/pine4/pine3" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.29207, 0, -0.0323019)
+
+[node name="pine5" parent="NavigationRegion3D/StaticBody3D2/pine2/pine4/pine4/pine3/pine4" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.48588, 0, -0.0323019)
+
+[node name="pine4" parent="NavigationRegion3D/StaticBody3D2/pine2/pine4/pine4" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.39441, 0, 0)
+
+[node name="pine3" parent="NavigationRegion3D/StaticBody3D2/pine2/pine4/pine4/pine4" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35668, 0, 0)
+
+[node name="pine4" parent="NavigationRegion3D/StaticBody3D2/pine2/pine4/pine4/pine4/pine3" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.29207, 0, -0.0323019)
+
+[node name="pine5" parent="NavigationRegion3D/StaticBody3D2/pine2/pine4/pine4/pine4/pine3/pine4" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.48588, 0, -0.0323019)
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="NavigationRegion3D/StaticBody3D2"]
+transform = Transform3D(-4.37114e-08, 0, -0.0365131, 0, 1, 0, 27.3874, 0, -4.37114e-08, -0.47477, 0, 12.4299)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D2"]
+shape = SubResource("BoxShape3D_llvml")
+
+[node name="pine2" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D2" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(0.0446813, 0, 0, 0, 0.451015, 0, 0, 0, 1.22371, -0.452585, -0.482486, 0.0929928)
+
+[node name="pine3" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D2/pine2" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35668, 0, 0)
+
+[node name="pine4" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D2/pine2/pine3" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.29207, 0, -0.0323019)
+
+[node name="pine5" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D2/pine2/pine3/pine4" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.48588, 0, -0.0323019)
+
+[node name="pine4" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D2/pine2" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.39441, 0, 0)
+
+[node name="pine3" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D2/pine2/pine4" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35668, 0, 0)
+
+[node name="pine4" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D2/pine2/pine4/pine3" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.29207, 0, -0.0323019)
+
+[node name="pine5" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D2/pine2/pine4/pine3/pine4" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.48588, 0, -0.0323019)
+
+[node name="pine4" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D2/pine2/pine4" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.49132, 0, 0)
+
+[node name="pine3" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D2/pine2/pine4/pine4" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35668, 0, 0)
+
+[node name="pine4" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D2/pine2/pine4/pine4/pine3" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.29207, 0, -0.0323019)
+
+[node name="pine5" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D2/pine2/pine4/pine4/pine3/pine4" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.48588, 0, -0.0323019)
+
+[node name="pine4" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D2/pine2/pine4/pine4" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.39441, 0, 0)
+
+[node name="pine3" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D2/pine2/pine4/pine4/pine4" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35668, 0, 0)
+
+[node name="pine4" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D2/pine2/pine4/pine4/pine4/pine3" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.29207, 0, -0.0323019)
+
+[node name="pine5" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D2/pine2/pine4/pine4/pine4/pine3/pine4" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.48588, 0, -0.0323019)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/StaticBody3D2"]
+transform = Transform3D(-1, 0, 3.19208e-09, 0, 1, 0, -2.39429e-06, 0, -1, -7.96281e-08, 0, 24.9171)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D"]
+shape = SubResource("BoxShape3D_llvml")
+
+[node name="pine2" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(0.0446813, 0, 0, 0, 0.451015, 0, 0, 0, 1.22371, -0.452585, -0.482486, 0.0929928)
+
+[node name="pine3" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D/pine2" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35668, 0, 0)
+
+[node name="pine4" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D/pine2/pine3" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.29207, 0, -0.0323019)
+
+[node name="pine5" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D/pine2/pine3/pine4" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.48588, 0, -0.0323019)
+
+[node name="pine4" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D/pine2" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.39441, 0, 0)
+
+[node name="pine3" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D/pine2/pine4" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35668, 0, 0)
+
+[node name="pine4" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D/pine2/pine4/pine3" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.29207, 0, -0.0323019)
+
+[node name="pine5" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D/pine2/pine4/pine3/pine4" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.48588, 0, -0.0323019)
+
+[node name="pine4" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D/pine2/pine4" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.49132, 0, 0)
+
+[node name="pine3" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D/pine2/pine4/pine4" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35668, 0, 0)
+
+[node name="pine4" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D/pine2/pine4/pine4/pine3" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.29207, 0, -0.0323019)
+
+[node name="pine5" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D/pine2/pine4/pine4/pine3/pine4" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.48588, 0, -0.0323019)
+
+[node name="pine4" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D/pine2/pine4/pine4" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.39441, 0, 0)
+
+[node name="pine3" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D/pine2/pine4/pine4/pine4" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35668, 0, 0)
+
+[node name="pine4" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D/pine2/pine4/pine4/pine4/pine3" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.29207, 0, -0.0323019)
+
+[node name="pine5" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D/pine2/pine4/pine4/pine4/pine3/pine4" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.48588, 0, -0.0323019)
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D"]
+transform = Transform3D(-4.37114e-08, 0, -0.0365131, 0, 1, 0, 27.3874, 0, -4.37114e-08, -0.47477, 0, 12.4299)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D/StaticBody3D2"]
+shape = SubResource("BoxShape3D_llvml")
+
+[node name="pine2" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D/StaticBody3D2" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(0.0446813, 0, 0, 0, 0.451015, 0, 0, 0, 1.22371, -0.452585, -0.482486, 0.0929928)
+
+[node name="pine3" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D/StaticBody3D2/pine2" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35668, 0, 0)
+
+[node name="pine4" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D/StaticBody3D2/pine2/pine3" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.29207, 0, -0.0323019)
+
+[node name="pine5" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D/StaticBody3D2/pine2/pine3/pine4" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.48588, 0, -0.0323019)
+
+[node name="pine4" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D/StaticBody3D2/pine2" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.39441, 0, 0)
+
+[node name="pine3" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D/StaticBody3D2/pine2/pine4" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35668, 0, 0)
+
+[node name="pine4" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D/StaticBody3D2/pine2/pine4/pine3" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.29207, 0, -0.0323019)
+
+[node name="pine5" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D/StaticBody3D2/pine2/pine4/pine3/pine4" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.48588, 0, -0.0323019)
+
+[node name="pine4" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D/StaticBody3D2/pine2/pine4" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.49132, 0, 0)
+
+[node name="pine3" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D/StaticBody3D2/pine2/pine4/pine4" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35668, 0, 0)
+
+[node name="pine4" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D/StaticBody3D2/pine2/pine4/pine4/pine3" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.29207, 0, -0.0323019)
+
+[node name="pine5" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D/StaticBody3D2/pine2/pine4/pine4/pine3/pine4" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.48588, 0, -0.0323019)
+
+[node name="pine4" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D/StaticBody3D2/pine2/pine4/pine4" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.39441, 0, 0)
+
+[node name="pine3" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D/StaticBody3D2/pine2/pine4/pine4/pine4" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35668, 0, 0)
+
+[node name="pine4" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D/StaticBody3D2/pine2/pine4/pine4/pine4/pine3" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.29207, 0, -0.0323019)
+
+[node name="pine5" parent="NavigationRegion3D/StaticBody3D2/StaticBody3D/StaticBody3D2/pine2/pine4/pine4/pine4/pine3/pine4" instance=ExtResource("9_w1bbi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.48588, 0, -0.0323019)

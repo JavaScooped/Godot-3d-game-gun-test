@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddt7ef7hrf3md"]
+
+[ext_resource type="Script" path="res://bullet.gd" id="1_gj1ln"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_tkmio"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_gj1ln")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+mesh = SubResource("SphereMesh_tkmio")

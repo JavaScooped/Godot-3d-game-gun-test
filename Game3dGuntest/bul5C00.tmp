@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddt7ef7hrf3md"]
+
+[ext_resource type="Script" path="res://bullet.gd" id="1_gj1ln"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_b7oys"]
+
+[node name="RigidBody3D" type="RigidBody3D"]
+transform = Transform3D(0.206289, 0, 0, 0, 0.206289, 0, 0, 0, 0.396953, 0, 0, 0)
+script = ExtResource("1_gj1ln")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.123083, 0, 0, 0, 0.123083, 0, 0, 0, 0.367871, 0, 0, 0)
+mesh = SubResource("BoxMesh_b7oys")

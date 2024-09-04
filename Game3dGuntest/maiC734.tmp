@@ -1,0 +1,64 @@
+[gd_scene load_steps=14 format=3 uid="uid://bltcnoi3qnk8g"]
+
+[ext_resource type="Texture2D" uid="uid://dj0mb1wnw2gav" path="res://sky.jpg" id="1_4mwah"]
+[ext_resource type="Script" path="res://main.gd" id="1_52571"]
+[ext_resource type="Script" path="res://CharacterBody3D.gd" id="2_nexal"]
+[ext_resource type="PackedScene" uid="uid://bvwi38ks4sa1o" path="res://man.glb" id="4_46vya"]
+[ext_resource type="PackedScene" uid="uid://cda5eg6xnuuv" path="res://glock19.glb" id="5_gk86d"]
+[ext_resource type="Script" path="res://Camera3D.gd" id="6_ujqlq"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_cxd0m"]
+panorama = ExtResource("1_4mwah")
+
+[sub_resource type="Sky" id="Sky_765ia"]
+sky_material = SubResource("PanoramaSkyMaterial_cxd0m")
+
+[sub_resource type="Environment" id="Environment_pf0la"]
+background_mode = 2
+sky = SubResource("Sky_765ia")
+ambient_light_source = 3
+reflected_light_source = 2
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r6mlu"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_22h7d"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ixwk7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mmm3l"]
+albedo_color = Color(0, 1, 0.25098, 1)
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_52571")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_pf0la")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+transform = Transform3D(3.26918, 0, 0, 0, 3.26918, 0, 0, 0, 3.26918, 0, 1.5313, 0)
+script = ExtResource("2_nexal")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(-2.22121e-08, 0, 2.07643, 0, 1.00514, 0, -0.508154, 0, -9.07636e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_r6mlu")
+
+[node name="man" parent="CharacterBody3D" instance=ExtResource("4_46vya")]
+transform = Transform3D(-3.46083e-09, 0, 0.0791745, 0, 0.0791745, 0, -0.0791745, 0, -3.46083e-09, -0.0433827, 0.367514, 0.0419427)
+
+[node name="glock19" parent="CharacterBody3D" instance=ExtResource("5_gk86d")]
+transform = Transform3D(0.0292306, 0, 0.000256621, 0, 0.0292318, 0, -0.000256621, 0, 0.0292306, 0.387368, 0.473259, -0.504902)
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D"]
+transform = Transform3D(0.305887, 0, 0, 0, 0.305887, 0, 0, 0, 0.305887, -0.05, 0.75, -0.15)
+script = ExtResource("6_ujqlq")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(67.6075, 0, 0, 0, 0.487653, 0, 0, 0, 68.523, 0, -2.01261, 0)
+shape = SubResource("BoxShape3D_22h7d")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D/CollisionShape3D"]
+mesh = SubResource("BoxMesh_ixwk7")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_mmm3l")
